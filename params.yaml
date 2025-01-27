@@ -1,0 +1,16 @@
+config_printing:
+  cmd: python utils.py
+dataset_filtering:
+  path_to_dataset_folder: //home/misha/scripts/brain_processing_pipeline/brain_data/Второе дыхание
+  allowed_shape: (164, 117)
+
+fourier_transform:
+  enable: false
+  method: fft + abs # can be one of "simple fft", "fft + abs" or "fft + norm"
+
+calculate_distance_matrix:
+  method: mse # can be one of "cosine dist", "angle", "mse"
+
+generate_distance_matrix_plots:
+  rows: 4
+  cols: 4

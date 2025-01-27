@@ -1,0 +1,85 @@
+schema: '2.0'
+stages:
+  data_filter:
+    cmd: python prepare_raw_data.py
+    deps:
+    - path: prepare_raw_data.py
+      hash: md5
+      md5: e5ba80cfb77ef9d316e2a44d3b91c6b9
+      size: 719
+    params:
+      params.yaml:
+        dataset_filtering:
+          path_to_dataset_folder: //home/misha/scripts/brain_processing_pipeline/brain_data/Второе
+            дыхание
+          allowed_shape: (164, 117)
+    outs:
+    - path: vars/data.npy
+      hash: md5
+      md5: 2beac249fa9378dd43daeff923e6f2cc
+      size: 197668355
+  fourier_transform:
+    cmd: python apply_fourier_transform.py
+    deps:
+    - path: apply_fourier_transform.py
+      hash: md5
+      md5: 30c3181c31e5ca4724669b94ce1924a6
+      size: 972
+    - path: vars/data.npy
+      hash: md5
+      md5: 2beac249fa9378dd43daeff923e6f2cc
+      size: 197668355
+    params:
+      params.yaml:
+        fourier_transform:
+          enable: false
+          method: fft + abs
+    outs:
+    - path: vars/data1.npy
+      hash: md5
+      md5: a65341e7c2ae80fd6deda44b75ba6e73
+      size: 197668394
+  calculate_distance_matrix:
+    cmd: python calculate_distance_matrix.py
+    deps:
+    - path: calculate_distance_matrix.py
+      hash: md5
+      md5: 941771d8ed4e2ea8b8c9376f3fedcff4
+      size: 1076
+    - path: vars/data1.npy
+      hash: md5
+      md5: a65341e7c2ae80fd6deda44b75ba6e73
+      size: 197668394
+    params:
+      params.yaml:
+        calculate_distance_matrix:
+          method: mse
+    outs:
+    - path: vars/distance_matrix.npy
+      hash: md5
+      md5: 8f4d8ae57942e3aede46a75fc0d7cf35
+      size: 275738191
+  generate_distance_matrix_images:
+    cmd: python generate_distance_matrix_plots.py
+    deps:
+    - path: generate_distance_matrix_plots.py
+      hash: md5
+      md5: b7c648137acf6d796b18746b5793f369
+      size: 2025
+    - path: vars/distance_matrix.npy
+      hash: md5
+      md5: 8f4d8ae57942e3aede46a75fc0d7cf35
+      size: 275738191
+    params:
+      params.yaml:
+        generate_distance_matrix_plots:
+          rows: 4
+          cols: 4
+    outs:
+    - path: vars/images
+      hash: md5
+      md5: 4f083b6db068bbd1bc11517b9eb3628c.dir
+      size: 724675
+      nfiles: 1
+  config_printing:
+    cmd: python utils.py
