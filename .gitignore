@@ -1,6 +1,5 @@
 brain_data/*
 
-dvc.lock
 *__pycache__*
 vars/*
 venv*
