@@ -1,6 +1,8 @@
 stages:
   config_printing:
     cmd: python utils.py
+    always_changed: true
+
   data_filter:
     cmd: python prepare_raw_data.py
     deps: [prepare_raw_data.py]
