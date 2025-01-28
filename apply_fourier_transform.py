@@ -10,7 +10,7 @@ def process_data(data):
             pass
         elif method == allowed_methods[1]:
             fft_value = np.abs(fft_value)
-        elif method == allowed_methdos[2]:
+        elif method == allowed_methods[2]:
             fft_value = fft_value / np.abs(fft_value)
         else:
             error_msg = f"Incorrect method for doing fourier transform: {current_method}. Should been one of {allowed_methods}"
