@@ -1,7 +1,9 @@
 config_printing:
   cmd: python utils.py
+
 dataset_filtering:
-  path_to_dataset_folder: //home/misha/scripts/brain_processing_pipeline/brain_data/Второе дыхание
+  path_to_dataset_folder: /home/misha/scripts/brain_processing_pipeline/brain_data/Второе дыхание
+  groups: ["controls", "patients"]
   allowed_shape: (164, 117)
 
 fourier_transform:

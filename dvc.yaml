@@ -1,28 +1,28 @@
 stages:
   config_printing:
-    cmd: python utils.py
+    cmd: python3 utils.py
     always_changed: true
 
   data_filter:
-    cmd: python prepare_raw_data.py
+    cmd: python3 prepare_raw_data.py
     deps: [prepare_raw_data.py]
     params: [dataset_filtering]
     outs: [vars/data.npy]
   
   fourier_transform:
-    cmd: python apply_fourier_transform.py
+    cmd: python3 apply_fourier_transform.py
     params: [fourier_transform]
     deps: [apply_fourier_transform.py, vars/data.npy]
     outs: [vars/data1.npy]
 
   calculate_distance_matrix:
-    cmd: python calculate_distance_matrix.py
+    cmd: python3 calculate_distance_matrix.py
     params: [calculate_distance_matrix]
     deps: [calculate_distance_matrix.py, vars/data1.npy]
     outs: [vars/distance_matrix.npy]
   
   generate_distance_matrix_images:
-    cmd: python generate_distance_matrix_plots.py
+    cmd: python3 generate_distance_matrix_plots.py
     deps: [generate_distance_matrix_plots.py, "vars/distance_matrix.npy"]
     params: [generate_distance_matrix_plots]
     outs: [vars/images]
