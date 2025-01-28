@@ -18,6 +18,7 @@ for group in config['dataset_filtering']["groups"]:
 
         csv_data = csv_data.drop("Unnamed: 0", axis=1)
         new_elem = parse_filename(csv_file)
+        print(group)
         new_elem["group"] = group
         new_elem["data"] = csv_data
         data.append(new_elem)

@@ -3,6 +3,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from collections import Counter
 
 random.seed(42)
 
@@ -12,6 +13,7 @@ random.shuffle(distance_matrix)
 # Create a 3x3 grid of subplots
 n, m = config["generate_distance_matrix_plots"]["rows"], config["generate_distance_matrix_plots"]["cols"],
 fig, axes = plt.subplots(n, m, figsize=(3.5 * n, int(2.5 * m)))
+print(Counter([elem["group"] for elem in distance_matrix]))
 
 # Plot each array as a heatmap in the grid
 for i, ax in enumerate(axes.flat):
@@ -30,7 +32,7 @@ for i, ax in enumerate(axes.flat):
         ax.text(
             0.5,  # Horizontal position (center)
             -0.05,  # Vertical position (below the heatmap)
-            f"subject_id={distance_matrix[i]['subject_id']}",  # Text based on index `i`
+            f"subject_id={distance_matrix[i]['subject_id']}\ngroup={distance_matrix[i]['group']}",  # Text based on index `i`
             ha='center',  # Horizontal alignment
             va='top',  # Vertical alignment
             transform=ax.transAxes,  # Use axes coordinates

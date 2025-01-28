@@ -1,12 +1,12 @@
 schema: '2.0'
 stages:
   data_filter:
-    cmd: python prepare_raw_data.py
+    cmd: python3 prepare_raw_data.py
     deps:
     - path: prepare_raw_data.py
       hash: md5
-      md5: 6511bd34c2ed8dc2828edac4a15cdd2e
-      size: 848
+      md5: 9ca6cce6f74feb4823141a4b0910a062
+      size: 869
     params:
       params.yaml:
         dataset_filtering:
@@ -22,7 +22,7 @@ stages:
       md5: 689a4fbfef9362cbc06f4ba1cf1bd0c7
       size: 121752477
   fourier_transform:
-    cmd: python apply_fourier_transform.py
+    cmd: python3 apply_fourier_transform.py
     deps:
     - path: apply_fourier_transform.py
       hash: md5
@@ -43,12 +43,12 @@ stages:
       md5: 5450aacd082a8c3f8ae385b2c70c71dc
       size: 121752516
   calculate_distance_matrix:
-    cmd: python calculate_distance_matrix.py
+    cmd: python3 calculate_distance_matrix.py
     deps:
     - path: calculate_distance_matrix.py
       hash: md5
-      md5: 941771d8ed4e2ea8b8c9376f3fedcff4
-      size: 1076
+      md5: c703a40f3e19f07c380c22dc04081558
+      size: 1116
     - path: vars/data1.npy
       hash: md5
       md5: 5450aacd082a8c3f8ae385b2c70c71dc
@@ -56,22 +56,22 @@ stages:
     params:
       params.yaml:
         calculate_distance_matrix:
-          method: mse
+          method: angle
     outs:
     - path: vars/distance_matrix.npy
       hash: md5
-      md5: b4e20d7c8bd41ea04c8160bfc87c9ca1
+      md5: 9ac2cfae498e1bda88c6931e48388ebd
       size: 169837376
   generate_distance_matrix_images:
-    cmd: python generate_distance_matrix_plots.py
+    cmd: python3 generate_distance_matrix_plots.py
     deps:
     - path: generate_distance_matrix_plots.py
       hash: md5
-      md5: b7c648137acf6d796b18746b5793f369
-      size: 2025
+      md5: 915c502dd54e4efd7a95378d73d353bb
+      size: 2154
     - path: vars/distance_matrix.npy
       hash: md5
-      md5: b4e20d7c8bd41ea04c8160bfc87c9ca1
+      md5: 9ac2cfae498e1bda88c6931e48388ebd
       size: 169837376
     params:
       params.yaml:
@@ -81,8 +81,8 @@ stages:
     outs:
     - path: vars/images
       hash: md5
-      md5: 9f7448dd39ee22200485f7e4b57a9889.dir
-      size: 723570
+      md5: eabd2d2ee41e317f503d318affb79514.dir
+      size: 836175
       nfiles: 1
   config_printing:
-    cmd: python utils.py
+    cmd: python3 utils.py

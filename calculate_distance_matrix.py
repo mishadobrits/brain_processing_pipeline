@@ -10,6 +10,7 @@ allowed_methods = ["cosine dist", "angle", "mse"]
 
 rt = []
 for cur_record in data:
+    print(cur_record["group"])
     record_to_append = cur_record
     cur_data = record_to_append.pop("data")
     if method == allowed_methods[0]:
@@ -20,8 +21,10 @@ for cur_record in data:
     #     pass
     elif method == "mse":
         cur_data = np.array(cur_data)
+        # check
         value = np.square(np.abs(cur_data[:, None, :] - cur_data[None, :, :])).mean(axis=2) # distance_matrix(cur_data, cur_data)
-        # print(np.linalg.trace(value))
+    #elif method == "l2 norm":
+#
     else:
         assert method in allowed_methods, "Incorrect method for calculating distance_matrix: {method}. Should be one of {allowed_methods}"
     

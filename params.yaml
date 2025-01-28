@@ -11,7 +11,7 @@ fourier_transform:
   method: fft + abs # can be one of "simple fft", "fft + abs" or "fft + norm"
 
 calculate_distance_matrix:
-  method: mse # can be one of "cosine dist", "angle", "mse"
+  method: angle # can be one of "cosine dist", "angle", "mse", "l2 norm"
 
 generate_distance_matrix_plots:
   rows: 4
