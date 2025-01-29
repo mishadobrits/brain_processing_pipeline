@@ -8,11 +8,11 @@ dataset_filtering:
 
 fourier_transform:
   enable: false
-  method: fft + abs # can be one of "simple fft", "fft + abs" or "fft + norm"
+  method: fft + norm # can be one of "simple fft", "fft + abs" or "fft + norm"
 
 calculate_distance_matrix:
-  method: angle # can be one of "cosine dist", "angle", "mse", "l2 norm"
+  method: l2 norm # can be one of "cosine dist", "angle", "mse", "l2 norm"
 
 generate_distance_matrix_plots:
-  rows: 4
-  cols: 4
+  rows: 10
+  cols: 3

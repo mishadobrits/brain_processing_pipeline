@@ -1,12 +1,14 @@
 schema: '2.0'
 stages:
+  config_printing:
+    cmd: python3 utils.py
   data_filter:
     cmd: python3 prepare_raw_data.py
     deps:
     - path: prepare_raw_data.py
       hash: md5
-      md5: 9ca6cce6f74feb4823141a4b0910a062
-      size: 869
+      md5: abaa433874a7fc09ebe2fa9cb1136b4e
+      size: 882
     params:
       params.yaml:
         dataset_filtering:
@@ -19,70 +21,68 @@ stages:
     outs:
     - path: vars/data.npy
       hash: md5
-      md5: 689a4fbfef9362cbc06f4ba1cf1bd0c7
-      size: 121752477
+      md5: 719a75bd6dd9349922ae65bf0910343b
+      size: 319427611
   fourier_transform:
     cmd: python3 apply_fourier_transform.py
     deps:
     - path: apply_fourier_transform.py
       hash: md5
-      md5: 30c3181c31e5ca4724669b94ce1924a6
+      md5: fcbc497a515c4e70d8602b7f3978f7b1
       size: 972
     - path: vars/data.npy
       hash: md5
-      md5: 689a4fbfef9362cbc06f4ba1cf1bd0c7
-      size: 121752477
+      md5: 719a75bd6dd9349922ae65bf0910343b
+      size: 319427611
     params:
       params.yaml:
         fourier_transform:
           enable: false
-          method: fft + abs
+          method: fft + norm
     outs:
     - path: vars/data1.npy
       hash: md5
-      md5: 5450aacd082a8c3f8ae385b2c70c71dc
-      size: 121752516
+      md5: 6fafd2b97af86019ef12e9609614002e
+      size: 319427650
   calculate_distance_matrix:
     cmd: python3 calculate_distance_matrix.py
     deps:
     - path: calculate_distance_matrix.py
       hash: md5
-      md5: c703a40f3e19f07c380c22dc04081558
-      size: 1116
+      md5: 977f7e5071a6f7df32629ad029334302
+      size: 1128
     - path: vars/data1.npy
       hash: md5
-      md5: 5450aacd082a8c3f8ae385b2c70c71dc
-      size: 121752516
+      md5: 6fafd2b97af86019ef12e9609614002e
+      size: 319427650
     params:
       params.yaml:
         calculate_distance_matrix:
-          method: angle
+          method: l2 norm
     outs:
     - path: vars/distance_matrix.npy
       hash: md5
-      md5: 9ac2cfae498e1bda88c6931e48388ebd
-      size: 169837376
+      md5: 078e554ce4894299bb7e63d395427fa3
+      size: 445582689
   generate_distance_matrix_images:
     cmd: python3 generate_distance_matrix_plots.py
     deps:
     - path: generate_distance_matrix_plots.py
       hash: md5
-      md5: 915c502dd54e4efd7a95378d73d353bb
-      size: 2154
+      md5: a212176a9cebfdb71dd8b905d2204182
+      size: 1470
     - path: vars/distance_matrix.npy
       hash: md5
-      md5: 9ac2cfae498e1bda88c6931e48388ebd
-      size: 169837376
+      md5: 078e554ce4894299bb7e63d395427fa3
+      size: 445582689
     params:
       params.yaml:
         generate_distance_matrix_plots:
-          rows: 4
-          cols: 4
+          rows: 10
+          cols: 3
     outs:
     - path: vars/images
       hash: md5
-      md5: eabd2d2ee41e317f503d318affb79514.dir
-      size: 836175
+      md5: e529836cd066ba5a7d5dea04878710f4.dir
+      size: 2466077
       nfiles: 1
-  config_printing:
-    cmd: python3 utils.py

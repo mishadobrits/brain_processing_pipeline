@@ -6,11 +6,10 @@ import numpy as np
 data = read_npy("data1.npy")
 
 method = config["calculate_distance_matrix"]["method"]
-allowed_methods = ["cosine dist", "angle", "mse"]
+allowed_methods = ["cosine dist", "angle", "mse", "l2 norm"]
 
 rt = []
 for cur_record in data:
-    print(cur_record["group"])
     record_to_append = cur_record
     cur_data = record_to_append.pop("data")
     if method == allowed_methods[0]:
@@ -19,12 +18,11 @@ for cur_record in data:
         value = np.acos(np.corrcoef(cur_data))
     # elif method == "wasserstein":
     #     pass
-    elif method == "mse":
+    elif method in "mse" or "l2 norm": 
         cur_data = np.array(cur_data)
-        # check
         value = np.square(np.abs(cur_data[:, None, :] - cur_data[None, :, :])).mean(axis=2) # distance_matrix(cur_data, cur_data)
-    #elif method == "l2 norm":
-#
+        if method == "l2 norm":
+            value = np.sqrt(value)
     else:
         assert method in allowed_methods, "Incorrect method for calculating distance_matrix: {method}. Should be one of {allowed_methods}"
     
