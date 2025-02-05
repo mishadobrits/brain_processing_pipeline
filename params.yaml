@@ -14,5 +14,5 @@ calculate_distance_matrix:
   method: l2 norm # can be one of "cosine dist", "angle", "mse", "l2 norm"
 
 generate_distance_matrix_plots:
-  rows: 10
+  rows: 11 
   cols: 3
